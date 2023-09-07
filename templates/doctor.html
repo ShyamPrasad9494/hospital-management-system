@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}
+DOCTOR
+{% endblock title %}
+
+{% block body %}
+
+<div class="container">
+
+<div class="row">
+
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <br>
+        {% with messages=get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      {% for category,message in messages %}
+      <div class="alert alert-{{category}} alert-dismissable fade show" role="alert">
+          {{message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+      </div>
+
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+        <br>
+        <h2 class="text-center text-white bg-primary">DOCTORS BOOKING</h2>
+        <br>
+        <form action="/doctors" method="post" class="p-3 bg-light">
+            <div class="form-group">
+                <input type="email" class="form-control" name="email" value={{current_user.email}} required>
+            </div><br>
+
+            <div class="form-group">
+                <input type="text" class="form-control" name="doctorname" placeholder="Doctor Name" required>
+            </div><br>
+
+            <div class="form-group">
+                <input type="text" class="form-control" name="dept" placeholder="Doctor Department" required>
+            </div><br>
+
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" class="btn btn-success btn-sm btn-block">BOOK</button>
+              </div>
+
+        </form>
+
+
+
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+
+
+</div>
+
+
+<script>
+    // Wait for the page to load
+    document.addEventListener("DOMContentLoaded", function () {
+        // Remove flash messages after 5 seconds
+        setTimeout(function () {
+            var flashMessages = document.querySelectorAll(".alert");
+            flashMessages.forEach(function (message) {
+                message.remove();
+            });
+        }, 5000); // 5 seconds in milliseconds
+    });
+</script>
+
+
+{% endblock body %}
